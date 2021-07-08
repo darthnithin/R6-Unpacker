@@ -230,7 +230,7 @@ def buildPng(fpath, vflip=True, rewrite=False):
     vflip = "-vflip " if vflip else ""
     exe = bin_path("texconv.exe")
     command = (
-        f"{exe} {rewrite}{vflip}-ft PNG -f R8G8B8A8_UNORM -o {fdir} {fpath}"
+        f"{exe} {rewrite}{vflip}-ft png -srgbi -l -f R8G8B8A8_UNORM_SRGB -o {fdir} {fpath}" # fix gamma + lowercase extension (requires updated texconv.exe)
     )
     texconv = sp.Popen(command, stdout=sp.PIPE)
     stdout = texconv.communicate()[0]
@@ -252,7 +252,11 @@ def touchdir(path):
 
 
 def is_texture(magic):
-    if magic in (0xD7B5C478, 0xF9C80707, 0x59CE4D13, 0x9F492D22, 0x3876ccdf):
+    if magic in (
+                0xD7B5C478, 0xF9C80707, 0x59CE4D13, 0x9F492D22,
+                0x3876CCDF,                                         # textures4 forges
+                0x9468B9E2, 0x5A61FAD                               # guitextures forges
+                ):
         return True
 
 

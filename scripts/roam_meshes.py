@@ -16,7 +16,7 @@ FORGES = r6s.settings.IMPORT  # can be replaced with custom path to forges
 # export range limiter so you don't accidentally unpack a couple gigs of textures
 forge_name = 'datapc64_merged_bnk_mesh.forge'
 start=0
-stop=1000
+stop=1_000_000
 step=1
 
 
@@ -43,8 +43,8 @@ with r6s.forge.parse(os.path.join(FORGES, forge_name)) as forge:
                         #mesh.x2C not in (9,10)  # see r6s.mesh.Mesh.x2C
                         mesh.num_verts < 100
                     ): continue
-                    
-                    
+
+
                     mesh.readmesh()
                     print(f'{i:8d}: {e.uid}')
                     # save mesh that passed filters
@@ -52,6 +52,6 @@ with r6s.forge.parse(os.path.join(FORGES, forge_name)) as forge:
                     
                     count_exported+=1
             except Exception as e:
-                print(f'{e.uid} failed ({fpath.name} {i})')
-                print(e)
-input('total exported:',count_exported)
+                #print(f'{i:8d}: {e.uid} - FAILED\n{err}')
+                pass
+input(f'total exported: {count_exported}')

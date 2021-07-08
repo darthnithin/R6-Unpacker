@@ -16,7 +16,7 @@ FORGES = r6s.settings.IMPORT  # can be replaced with custom path to forges
 # export range limiter so you don't accidentally unpack a couple gigs of textures
 forge_name = 'datapc64_merged_bnk_textures3.forge'
 start=0
-stop=1000
+stop=1_000_000
 step=1
 
 
@@ -46,6 +46,8 @@ with r6s.forge.parse(os.path.join(FORGES, forge_name)) as forge:
                     or h <512  # only images that are taller than 512px
                     or tex.tex_type != 0  # see.r6s.tex.Tex.tex_type
                     
+                    # tex.tex_type in (1, 2, 4, 5, 7)   # filters non diffuse or icon textures
+                    
                     # most face textures are 1:2 so we can use it to filter out
                     # a lot of garbage. For guns you will have to remove this check
                     or (h!=w*2)
@@ -63,4 +65,4 @@ with r6s.forge.parse(os.path.join(FORGES, forge_name)) as forge:
                     print(e)
                 
                 count_exported+=1
-input('total exported:',count_exported)
+input(f'total exported: {count_exported}')
