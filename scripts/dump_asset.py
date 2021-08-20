@@ -27,7 +27,6 @@ char and weapons related files.
 """
 
 def process_texture(dump_dir, forge, uid, entry_index):
-    return  # REMOVE THIS!
     idx = entry_index['index']
     tex = r6s.tex.Tex(forge.get_container(idx).file.getstream())
     try:
@@ -38,7 +37,6 @@ def process_texture(dump_dir, forge, uid, entry_index):
         return None
 
 def process_mesh(dump_dir, forge, uid, entry_index):
-    return  # REMOVE THIS!
     idx = entry_index['index']
     r = forge.get_container(idx).file.getstream()
     mesh = r6s.mesh.Mesh(r)
